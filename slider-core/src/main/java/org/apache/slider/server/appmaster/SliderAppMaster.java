@@ -1685,6 +1685,9 @@ public class SliderAppMaster extends AbstractSliderLaunchedService
         YarnConfiguration.NM_ADDRESS,
         "0.0.0.0:" + port,
         port);
+    // but force in the desired port, irrespective of the value
+    // in the configuration fields.
+    rpcAddress = new InetSocketAddress(rpcAddress.getAddress(), port);
     rpcService =
         new WorkflowRpcService("SliderRPC",
             RpcBinder.createProtobufServer(rpcAddress, getConfig(),
